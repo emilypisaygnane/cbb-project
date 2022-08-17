@@ -23,18 +23,43 @@
         <h1>Create a Post</h1>
         <nav>
             <a href="../">Bulletin</a>
-            <a id="sign-out-link" href="auth">Sign Out</a>
+            <a id="sign-out-link" href="auth">Sign out</a>
         </nav>
     </header>
 
     <main>
-        <div class="post-detail" id="post-detail">
-            <!-- <h2 class="category">category</h2>
-            <p class="title">title</p>
-            <p class="description">description</p>
-            <p class="contact">contact</p>
-            <button class="delete-button">Delete Post!</button> -->
+        <form id="post-it-form">
+            <label>
+                <div>Category</div>
+                <select id="category-select" name="category_id" required>
+                    <option disabled selected value="">choose a category...</option>
+                </select>
+            </label>
 
-        </div>
+            <label>
+                <div>Title</div>
+                <input name="title" required placeholder="my post is about...">
+            </label>
+
+            <label>
+                <div>Description</div>
+                <textarea name="description" required placeholder="more details..."></textarea>
+            </label>
+
+            <label>
+                <div>Contact</div>
+                <input name="contact" placeholder="how to get in touch..." />
+            </label>
+
+            <button>Add Post</button>
+
+            <p class="error"></p>
+        </form>
     </main>
+
+    <footer>&copy;2022 Software Developer</footer>
+
+    <script type="module" src="post.js"></script>
 </body>
+
+</html>

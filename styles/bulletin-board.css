@@ -30,6 +30,14 @@
     grid-template-rows: auto 1fr auto;
 }
 
+.bulletin-board a {
+    display: grid;
+    gap: 0.5em;
+    grid-template-rows: auto 1fr auto;
+    text-decoration: none;
+    color: inherit;
+}
+
 .post-it:hover {
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }

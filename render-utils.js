@@ -16,7 +16,7 @@ export function renderPosts(posts) {
 
     for (const post of posts) {
         const a = document.createElement('a');
-        a.href = `../post-detail/?id=${post.id}`;
+        a.href = `./details/?id=${post.id}`;
 
         const li = document.createElement('li');
         li.classList.add('post-it');
@@ -38,39 +38,10 @@ export function renderPosts(posts) {
 
         li.append(titleEl, categoryEl, descriptionEl, contactEl);
 
-        fragment.append(a);
         a.append(li);
+        
+        fragment.append(a);
     }
 
     return fragment;
-}
-
-export function renderPost(post) {
-    const postContainerEl = document.createElement('div');
-    postContainerEl.classList.add('post-detail');
-
-    const titleEl = document.createElement('h1');
-    titleEl.classList.add('title');
-    titleEl.textContent = `${post.title}`;
-
-    const categoryEl = document.createElement('div');
-    categoryEl.classList.add('category');
-    categoryEl.textContent = `${post.category.emoji}`;
-
-    const descriptionEl = document.createElement('p');
-    descriptionEl.classList.add('description');
-    descriptionEl.textContent = `${post.description}`;
-
-    const contactEl = document.createElement('div');
-    contactEl.classList.add('contact');
-    contactEl.textContent = `${post.contact}`;
-
-    postContainerEl.append(
-        titleEl,
-        categoryEl,
-        descriptionEl,
-        contactEl
-    );
-
-    return postContainerEl;
 }

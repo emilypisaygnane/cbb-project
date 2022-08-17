@@ -5,30 +5,25 @@ const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 /* Auth related functions */
 
 export function getUser() {
-    return client.auth
-        .user();
+    return client.auth.user();
 }
 
 export function checkAuth() {
     const user = getUser();
-    if (!user) location
-        .replace(`/auth/?redirectUrl=${encodeURIComponent(location)}`);
+    if (!user) location.replace(`/auth/?redirectUrl=${encodeURIComponent(location)}`);
     return user;
 }
 
 export async function signUpUser(email, password) {
-    return await client.auth
-        .signUp({ email, password });
+    return await client.auth.signUp({ email, password });
 }
 
 export async function signInUser(email, password) {
-    return await client.auth
-        .signIn({ email, password });
+    return await client.auth.signIn({ email, password });
 }
 
 export async function signOutUser() {
-    return await client.auth
-        .signOut();
+    return await client.auth.signOut();
 }
 
 /* Helper for logging errors */
@@ -41,44 +36,30 @@ function checkError({ data, error }) {
 /* Categories */
 
 export async function getCategories() {
-    const response = await client
-        .from('categories')
-        .select('*');
+    const response = await client.from('categories').select('*');
     return checkError(response);
 }
 
 /* Posts */
 
 export async function getPosts() {
-    const response = await client
-        .from('posts')
-        .select(`
+    const response = await client.from('posts').select(`
         *,
         category:categories(*)
     `);
-    return response.data;
+    return checkError(response);
 }
-
 
 export async function createPost(post) {
-    return await client
-        .from('posts')
-        .insert(post);
+    return await client.from('posts').insert(post);
 }
 
-export async function displayPost(id) {
-    const response = await client
-        .from('posts')
-        .select('*, category:categories(*)')
-        .match({ id })
-        .single();
+export async function getPostDetail(id) {
+    const response = await client.from('posts').select('*').match({ id }).single();
+    
     return response.data;
 }
 
 export async function deletePost(id) {
-    const response = await client 
-        .from('posts')
-        .delete()
-        .match({ id });
-    return response.data;
+    await client.from('posts').delete().match({ id });
 }
