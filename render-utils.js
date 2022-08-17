@@ -1,5 +1,4 @@
 export function renderCategoryOptions(categories) {
-    // document fragment is a "bag" for elements
     const fragment = document.createDocumentFragment();
 
     for (const category of categories) {
@@ -35,7 +34,7 @@ export function renderPosts(posts) {
         contactEl.textContent = post.contact;
 
         const a = document.createElement('a');
-        a.href = `./details/?id=${post.id}`;
+        a.href = `./post/?id=${post.id}`;
 
         li.append(titleEl, categoryEl, descriptionEl, contactEl);
 
@@ -44,4 +43,29 @@ export function renderPosts(posts) {
     }
 
     return fragment;
+}
+
+export function renderPost(post) {
+    const postEl = document.createElement('div');
+    const titleEl = document.createElement('h1');
+    const categoryEmojiEl = document.createElement('div');
+    const categoryNameEl = document.createElement('span');
+    const descriptionEl = document.createElement('p');
+    const contactEl = document.createElement('div');
+
+    titleEl.textContent = post.title;
+    categoryEmojiEl.textContent = post.category.emoji;
+    categoryNameEl.textContent = post.category.name;
+    descriptionEl.textContent = post.description;
+    contactEl.textContent = post.contact;
+
+    postEl.append(
+        titleEl,
+        categoryEmojiEl,
+        categoryNameEl,
+        descriptionEl,
+        contactEl
+    );
+
+    return postEl;
 }
