@@ -66,7 +66,7 @@ export async function createPost(post) {
         .insert(post);
 }
 
-export async function getPost(id) {
+export async function displayPost(id) {
     const response = await client
         .from('posts')
         .select('*, category:categories(*)')

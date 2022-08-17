@@ -15,6 +15,9 @@ export function renderPosts(posts) {
     const fragment = document.createDocumentFragment();
 
     for (const post of posts) {
+        const a = document.createElement('a');
+        a.href = `../post-detail/?id=${post.id}`;
+
         const li = document.createElement('li');
         li.classList.add('post-it');
 
@@ -33,9 +36,6 @@ export function renderPosts(posts) {
         const contactEl = document.createElement('p');
         contactEl.textContent = post.contact;
 
-        const a = document.createElement('a');
-        a.href = `./post/?id=${post.id}`;
-
         li.append(titleEl, categoryEl, descriptionEl, contactEl);
 
         fragment.append(a);
@@ -46,26 +46,31 @@ export function renderPosts(posts) {
 }
 
 export function renderPost(post) {
-    const postEl = document.createElement('div');
+    const postContainerEl = document.createElement('div');
+    postContainerEl.classList.add('post-detail');
+
     const titleEl = document.createElement('h1');
-    const categoryEmojiEl = document.createElement('div');
-    const categoryNameEl = document.createElement('span');
+    titleEl.classList.add('title');
+    titleEl.textContent = `${post.title}`;
+
+    const categoryEl = document.createElement('div');
+    categoryEl.classList.add('category');
+    categoryEl.textContent = `${post.category.emoji}`;
+
     const descriptionEl = document.createElement('p');
+    descriptionEl.classList.add('description');
+    descriptionEl.textContent = `${post.description}`;
+
     const contactEl = document.createElement('div');
+    contactEl.classList.add('contact');
+    contactEl.textContent = `${post.contact}`;
 
-    titleEl.textContent = post.title;
-    categoryEmojiEl.textContent = post.category.emoji;
-    categoryNameEl.textContent = post.category.name;
-    descriptionEl.textContent = post.description;
-    contactEl.textContent = post.contact;
-
-    postEl.append(
+    postContainerEl.append(
         titleEl,
-        categoryEmojiEl,
-        categoryNameEl,
+        categoryEl,
         descriptionEl,
         contactEl
     );
 
-    return postEl;
+    return postContainerEl;
 }
