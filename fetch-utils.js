@@ -60,19 +60,20 @@ export async function createPost(post) {
         .insert(post);
 }
 
-export async function getPostDetail(id) {
+export async function getPostById(id) {
     const response = await client
         .from('posts')
         .select('*')
         .match({ id })
         .single();
     
-    return response.data;
+    return checkError(response);
 }
 
 export async function deletePost(id) {
-    return await client
+    const response = await client
         .from('posts')
         .delete()
         .match({ id });
+    return checkError(response);
 }

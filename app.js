@@ -1,7 +1,4 @@
-// importing other stuff, utility functions for:
-// working with supabase
 import { checkAuth, signOutUser, getPosts } from './fetch-utils.js';
-// pure rendering (data --> DOM)
 import { renderPosts } from './render-utils.js';
 
 // some "boiler plate" code for:

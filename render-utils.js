@@ -45,3 +45,24 @@ export function renderPosts(posts) {
 
     return fragment;
 }
+
+export function renderPostDetails(post) {
+    const container = document.createElement ('div');
+
+    const titleEl = document.createElement('h2');
+    titleEl.textContent = post.title;
+
+    const categoryEl = document.createElement('span');
+    categoryEl.textContent = post.category_id;
+
+    const descriptionEl = document.createElement9('p');
+    descriptionEl.textContent = post.description;
+
+    const contactEl = document.createElement('p');
+    contactEl.textContent = post.contact;
+
+    container.append(titleEl, categoryEl, descriptionEl, contactEl);
+
+    return container;
+
+}
