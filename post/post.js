@@ -1,7 +1,7 @@
 import { getPostById, checkAuth, deletePost } from '../fetch-utils.js';
 import { renderPostDetails } from '../render-utils.js';
 
-const postDetailsContainerEl = document.getElementById('post-details');
+const postDetailContainerEl = document.getElementById('post-detail-container');
 const params = new URLSearchParams(window.location.search);
 
 displayPost();
@@ -10,7 +10,7 @@ async function displayPost() {
     const data = await getPostById(params.get('id'));
     const postDiv = renderPostDetails(data);
 
-    postDetailsContainerEl.append(postDiv);
+    postDetailContainerEl.append(postDiv);
 
     const user = checkAuth();
 
@@ -27,6 +27,6 @@ async function displayPost() {
             location.replace('../');
         });
 
-        postDetailsContainerEl.append(deleteButton);
+        postDetailContainerEl.append(deleteButton);
     }
 }
