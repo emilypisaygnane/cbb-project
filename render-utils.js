@@ -34,13 +34,13 @@ export function renderPosts(posts) {
         contactEl.textContent = post.contact;
 
         const a = document.createElement('a');
-        a.href = `./details/?id=${post.id}`;
+        a.href = `./post/?id=${post.id}`;
 
-        li.append(titleEl, categoryEl, descriptionEl, contactEl);
+        a.append(titleEl, categoryEl, descriptionEl, contactEl);
 
-        a.append(li);
+        li.append(a);
         
-        fragment.append(a);
+        fragment.append(li);
     }
 
     return fragment;
@@ -55,7 +55,7 @@ export function renderPostDetails(post) {
     const categoryEl = document.createElement('span');
     categoryEl.textContent = post.category_id;
 
-    const descriptionEl = document.createElement9('p');
+    const descriptionEl = document.createElement('p');
     descriptionEl.textContent = post.description;
 
     const contactEl = document.createElement('p');

@@ -1,64 +1,32 @@
-// imports
-// auth related (checkAuth, signOutUser)
-import { checkAuth, signOutUser, getCategories, createPost } from '../fetch-utils.js';
-import { renderCategoryOptions } from '../render-utils.js';
+import { getPostById, checkAuth, deletePost } from '../fetch-utils.js';
+import { renderPostDetails } from '../render-utils.js';
 
-const signOutLink = document.getElementById('sign-out-link');
-checkAuth();
-signOutLink.addEventListener('click', signOutUser);
+const postDetailsContainerEl = document.getElementById('post-details');
+const params = new URLSearchParams(window.location.search);
 
-const categorySelect = document.getElementById('category-select');
-const postItForm = document.getElementById('post-it-form');
-const addButton = postItForm.querySelector('button');
-const errorDisplay = postItForm.querySelector('.error');
+displayPost();
 
-async function displayCategories() {
-    // go get the categories from the db
-    const categories = await getCategories();
-    // create a bunch of <option> elements
-    const options = renderCategoryOptions(categories);
-    // add them to the <select>
-    categorySelect.append(options);
-}
+async function displayPost() {
+    const data = await getPostById(params.get('id'));
+    const postDiv = renderPostDetails(data);
 
-// call on page load
-displayCategories();
+    postDetailsContainerEl.append(postDiv);
 
-postItForm.addEventListener('submit', async (e) => {
-    // keep the form from changing the browser page
-    e.preventDefault();
+    const user = checkAuth();
 
-    // niceties for "saving" and errors:
-    // reset the error
-    errorDisplay.textContent = '';
-    // remember the button text
-    const buttonText = addButton.textContent;
-    // disabled button and change to "saving..."
-    addButton.disabled = true;
-    addButton.textContent = 'Saving...';
+    if (user.id === data.user_id) {
+        const deleteButton = document.createElement('button');
 
-    // get the data
-    const formData = new FormData(postItForm);
-    // and send to server
-    const response = await createPost({
-        title: formData.get('title'),
-        description: formData.get('description'),
-        category_id: formData.get('category_id'),
-        contact: formData.get('contact'),
-    });
+        deleteButton.textContent = 'Delete Post';
+        
+        deleteButton.addEventListener('click', async () => {
+            await deletePost(data.id);
 
-    const error = response.error;
+            alert('You deleted your post');
 
-    // did it work?
-    if (error) {
-        // display the error
-        errorDisplay.textContent = error.message;
-        // reset the button to be active
-        addButton.disabled = false;
-        // restore the button text to what it was
-        addButton.textContent = buttonText;
-    } else {
-        // go back to bulletin board page
-        location.assign('../');
+            location.replace('../');
+        });
+
+        postDetailsContainerEl.append(deleteButton);
     }
-});
+}
