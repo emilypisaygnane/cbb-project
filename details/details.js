@@ -7,46 +7,43 @@ const displayBulletinBoard = document.querySelector('.bulletin-board');
 function renderPostDetail(post) {
 
     const div = document.createElement('div');
-    const h = document.createElement('h2');
-    const dateP = document.createElement('p');
-    const descriptionP = document.createElement('p');
-    const delButton = document.createElement('button');
-    const commentsP = document.createElement('p');
+    const titleEl = document.createElement('h2');
+    const dateEl = document.createElement('p');
+    const descriptionEl = document.createElement('p');
+    const deleteButton = document.createElement('button');
+    const commentEl = document.createElement('p');
     const inputBlock = document.createElement('input');
 
 
-    dateP.textContent = `last modified ${date}`;
-    dateP.classList.add('date-text');
+    dateEl.textContent = `Latest Modification: ${date}`;
+    dateEl.classList.add('date-text');
 
-    h.textContent = post.title;
-    descriptionP.textContent = post.description;
+    titleEl.textContent = post.title;
 
-    delButton.textContent = 'Delete';
+    descriptionEl.textContent = post.description;
+
+    deleteButton.textContent = 'Delete';
     // setting up user auth to delete
-    delButton.addEventListener('click', async () => {
+    deleteButton.addEventListener('click', async () => {
         const user = checkAuth();
         if (user.id === post.user_id) {
             await deletePost(post.id);
         } else {
             alert('This is not your post to delete');
         }
-        location.href = '../';
+        location.replace ('../');
     });
-
-    // const user = checkAuth();
-    // if (user.id === post.user_id) {
-    //     // remove the hidden class and add in the delete button class
-    //     delButton.addEventListener('click', () => {
-    //         deletePost(post.id);
-    //     }
-    //     , location.href = '../');
-    // }
-
     
     div.classList.add('post-detail-container');
-    descriptionP.classList.add('post-description');
+    descriptionEl.classList.add('post-description');
 
-    div.append(h, dateP, descriptionP, delButton, commentsP, inputBlock);
+    div.append(
+        titleEl, 
+        dateEl, 
+        descriptionEl, 
+        deleteButton, 
+        commentEl, 
+        inputBlock);
 
     return div;
 }
@@ -54,13 +51,13 @@ function renderPostDetail(post) {
 //URL Search Params
 const params = new URLSearchParams(window.location.search);
 
-async function loadPost() {
+async function loadData() {
     const post = await getPostDetail(params.get('id'));
-    const postDisplay = renderPostDetail(post);
-    displayBulletinBoard.append(postDisplay);
+    const displayPost = renderPostDetail(post);
+    displayBulletinBoard.append(displayPost);
 }
 
-loadPost();
+loadData();
 
 // displaying date
 let today = new Date(); 

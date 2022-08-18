@@ -36,14 +36,18 @@ function checkError({ data, error }) {
 /* Categories */
 
 export async function getCategories() {
-    const response = await client.from('categories').select('*');
+    const response = await client
+        .from('categories')
+        .select('*');
     return checkError(response);
 }
 
 /* Posts */
 
 export async function getPosts() {
-    const response = await client.from('posts').select(`
+    const response = await client
+        .from('posts')
+        .select(`
         *,
         category:categories(*)
     `);
@@ -51,15 +55,24 @@ export async function getPosts() {
 }
 
 export async function createPost(post) {
-    return await client.from('posts').insert(post);
+    return await client
+        .from('posts')
+        .insert(post);
 }
 
 export async function getPostDetail(id) {
-    const response = await client.from('posts').select('*').match({ id }).single();
+    const response = await client
+        .from('posts')
+        .select('*')
+        .match({ id })
+        .single();
     
     return response.data;
 }
 
 export async function deletePost(id) {
-    await client.from('posts').delete().match({ id });
+    return await client
+        .from('posts')
+        .delete()
+        .match({ id });
 }
