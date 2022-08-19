@@ -1,4 +1,4 @@
-import { checkAuth, signOutUser, getPosts, getCategories } from './fetch-utils.js';
+import { checkAuth, signOutUser, getPosts } from './fetch-utils.js';
 import { renderPosts } from './render-utils.js';
 
 // some "boiler plate" code for:
@@ -19,4 +19,3 @@ async function displayPosts() {
 
 displayPosts();
 
-getCategories();
