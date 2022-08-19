@@ -41,13 +41,19 @@ export function renderPosts(posts) {
 
     return fragment;
 }
-export function renderProfile(user) {
+export function renderProfile(profile) {
     const profileEl = document.createElement('div');
     
-    const nameEl = document.createElement('p');
-    nameEl.textContent = `${user.name}`;
+    const nameEl = document.createElement('h3');
+    nameEl.textContent = profile.name;
 
-    profileEl.append(nameEl);
+    const bioEl = document.createElement('p');
+    bioEl.textContent = profile.bio;
+
+    const avatarEl = document.createElement('p');
+    avatarEl.textContent = profile.avatar.url;
+
+    profileEl.append(nameEl, avatarEl, bioEl);
 
     return profileEl;
 }

@@ -83,5 +83,6 @@ export async function getProfile(id) {
 export async function saveProfile(userProfile) {
     return await client
         .from('profiles')
-        .upsert(userProfile);
+        .upsert(userProfile)
+        .single();
 }
