@@ -1,34 +1,48 @@
-import { checkAuth, saveProfile, getProfile } from '../fetch-utils.js';
+import { checkAuth, saveProfile, getProfile, signOutUser } from '../fetch-utils.js';
 
 const formEl = document.getElementById('user-form');
-const profileNameInput = formEl.querySelector('[name=user-name]');
-const profileBioInput = document.getElementById('[name=user-bio]');
-
-const userProfile = {
-    name: '',
-    bio: ''
-
-};
+const nameEl = formEl.querySelector('user-name]');
+const bioEl = document.getElementById('user-bio]');
+const avatarEl = document.getElementById('avatar');
+const button = document.getElementById('button');
+const signOutLink = document.getElementById('sign-out-link');
 
 const user = checkAuth();
+
+signOutLink.addEventListener('click', signOutUser);
+
+checkAuth();
 
 formEl.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const data = new FormData(formEl);
+    const name = data.get('user-name');
+    const bio = data.get('user-bio');
+    const avatar = data.get('avatar');
 
-    userProfile.name = data.get('user-name');
-    userProfile.bio = data.get('user-bio');
+    await saveProfile({
+        id: user.id,
+        user_name: name,
+        bio: bio,
+        avatar_url: avatar
+    });
 
-    await saveProfile(userProfile);
+    formEl.reset();
+
+    displayProfile();
 });
 
 async function displayProfile() {
     const response = await getProfile(user.id);
 
     if (response) {
-        profileNameInput.value = response.name;
-        profileBioInput.value = response.bio;
+        nameEl.value = response.name;
+        bioEl.value = response.bio;
+        avatarEl.value = response.avatar_url;
+        button.textContent = 'update';
     }
 }
 displayProfile();
+
+checkAuth();

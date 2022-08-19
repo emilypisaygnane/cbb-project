@@ -12,9 +12,10 @@ async function displayProfiles() {
     const users = await getProfiles();
     
     for (let user of users) {
-        // const userEl = renderProfile(user);
+        const renderedProfile = renderProfile(user);
+        renderedProfile.classList.add('post-it');
 
-        usersEl.append(renderProfile(user));
+        usersEl.append(renderProfile);
     }
 }
 displayProfiles();
