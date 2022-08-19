@@ -1,7 +1,7 @@
 import { getProfiles } from '../fetch-utils.js';
 import { renderProfile } from '../render-utils.js';
 
-const usersEl = document.getAnimations('users-container');
+const usersEl = document.getElementById('users-container');
 
 async function displayProfiles() {
     const users = await getProfiles();

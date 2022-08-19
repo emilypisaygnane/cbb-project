@@ -5,8 +5,8 @@ const userNameInput = document.getElementById('user-name');
 const userBioInput = document.getElementById('user-bio');
 
 const userProfile = {
-    name: '';
-    bio: '';
+    name: '',
+    bio: ''
 
 };
 

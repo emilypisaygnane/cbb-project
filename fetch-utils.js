@@ -36,22 +36,30 @@ function checkError({ data, error }) {
 /* Categories */
 
 export async function getCategories() {
-    const response = await client.from('categories').select('*');
+    const response = await client
+        .from('categories')
+        .select('*');
+
     return checkError(response);
 }
 
 /* Posts */
 
 export async function getPosts() {
-    const response = await client.from('posts').select(`
+    const response = await client
+        .from('posts')
+        .select(`
         *,
         category:categories(*)
     `);
+
     return checkError(response);
 }
 
 export async function createPost(post) {
-    return await client.from('posts').insert(post);
+    return await client
+        .from('posts')
+        .insert(post);
 }
 
 export async function getProfiles() {
