@@ -51,7 +51,7 @@ export function renderProfile(profile) {
     bioEl.textContent = profile.bio;
 
     const avatarEl = document.createElement('p');
-    avatarEl.textContent = profile.avatar.url;
+    avatarEl.textContent = profile.avatar_url;
 
     profileEl.append(nameEl, avatarEl, bioEl);
 

@@ -1,13 +1,15 @@
 import { checkAuth, saveProfile, getProfile, signOutUser } from '../fetch-utils.js';
 
 const formEl = document.getElementById('user-form');
-const nameEl = formEl.querySelector('user-name]');
-const bioEl = document.getElementById('user-bio]');
+const nameEl = document.getElementById('user-name');
+const bioEl = document.getElementById('user-bio');
 const avatarEl = document.getElementById('avatar');
 const button = document.getElementById('button');
 const signOutLink = document.getElementById('sign-out-link');
 
 const user = checkAuth();
+
+console.log(formEl);
 
 signOutLink.addEventListener('click', signOutUser);
 
@@ -37,7 +39,7 @@ async function displayProfile() {
     const response = await getProfile(user.id);
 
     if (response) {
-        nameEl.value = response.name;
+        nameEl.value = response.user_name;
         bioEl.value = response.bio;
         avatarEl.value = response.avatar_url;
         button.textContent = 'update';
