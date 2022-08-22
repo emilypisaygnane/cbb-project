@@ -60,6 +60,7 @@ export async function createPost(post) {
     return await client
         .from('posts')
         .insert(post);
+
 }
 
 export async function getProfiles() {
@@ -85,4 +86,24 @@ export async function saveProfile(userProfile) {
         .from('profiles')
         .upsert(userProfile)
         .single();
+
+}
+
+export async function getPostById(id) {
+    const response = await client
+        .from('posts')
+        .select('*')
+        .match({ id })
+        .single();
+    
+    return checkError(response);
+}
+
+export async function deletePost(id) {
+    const response = await client
+        .from('posts')
+        .delete()
+        .match({ id });
+    return checkError(response);
+
 }
