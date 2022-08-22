@@ -1,4 +1,4 @@
-#bulletin-board {
+.bulletin-board {
     height: 100%;
     background-image: url(../assets/bulletin-bg.jpeg);
     border: 10px solid black;
@@ -28,6 +28,14 @@
     display: grid;
     gap: 0.5em;
     grid-template-rows: auto 1fr auto;
+}
+.post-it a{
+    display: grid;
+    gap: 0.5em;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    text-decoration: none;
+    color: inherit
 }
 
 .post-it:hover {
