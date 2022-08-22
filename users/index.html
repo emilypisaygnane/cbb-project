@@ -14,31 +14,32 @@
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/global.css" />
     <link rel="stylesheet" href="/styles/bulletin-board.css" />
-    <title>Community Bulletin Board</title>
+    
+    
+    <title>Current Users</title>
 </head>
 
 <body>
     <header>
         <img class="logo" src="/assets/cbb-logo.png">
-        <h1>Community BB</h1>
+        <h1>Current Users</h1>
         <nav>
-            <a href="./create-post">Add Post</a>
-            <a id="sign-out-link" href="./auth">Sign Out</a>
-            <a id="users" href="./users">Users</a>
-            <a id="profile" href="./profile">Edit Profile</a>
+            <a href="../create-post">Add a Post</a>
+            <a id="sign-out-link" href="/auth">Sign Out</a>
+            <a id="profile" href="../profile">Profile</a>
+            <a href="../">Back to Bulletin</a>
         </nav>
     </header>
 
     <main>
-        <ul id="bulletin-board" class="bulletin-board">
-            
-        </ul>
+        <div id="users-container">
+        </div>
 
     </main>
 
     <footer>&copy;2022 Software Developer</footer>
 
-    <script type="module" src="app.js"></script>
+    <script type="module" src="users.js"></script>
 </body>
 
 </html>

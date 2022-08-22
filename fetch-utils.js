@@ -39,6 +39,7 @@ export async function getCategories() {
     const response = await client
         .from('categories')
         .select('*');
+
     return checkError(response);
 }
 
@@ -51,6 +52,7 @@ export async function getPosts() {
         *,
         category:categories(*)
     `);
+
     return checkError(response);
 }
 
@@ -58,6 +60,33 @@ export async function createPost(post) {
     return await client
         .from('posts')
         .insert(post);
+
+}
+
+export async function getProfiles() {
+    const response = await client
+        .from('profiles')
+        .select('*');
+
+    return checkError(response);
+}
+
+export async function getProfile(id) {
+    const response = await client
+        .from('profiles')
+        .select('*')
+        .match({ id })
+        .single();
+
+    return checkError(response);
+}
+
+export async function saveProfile(userProfile) {
+    return await client
+        .from('profiles')
+        .upsert(userProfile)
+        .single();
+
 }
 
 export async function getPostById(id) {
@@ -76,4 +105,5 @@ export async function deletePost(id) {
         .delete()
         .match({ id });
     return checkError(response);
+
 }
