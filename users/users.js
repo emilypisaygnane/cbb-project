@@ -10,7 +10,7 @@ checkAuth();
 
 async function displayProfiles() {
     const users = await getProfiles();
-    console.log(users);
+    // console.log(users);
     for (let user of users) {
         const renderedProfile = renderProfile(user);
         console.log(renderedProfile);
